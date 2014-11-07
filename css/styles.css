@@ -1,0 +1,25 @@
+
+.panel-default>.table>thead{
+    background-color: #a4aeb9;
+}
+
+.table>thead>tr>th {
+border-bottom: 2px solid #93999e;
+}
+
+.panel-default th{
+   color: white;
+}
+
+.title{
+    font-size: 26px;
+    font-style: Arial;
+    color: #24B8EC;
+    padding: 3px 0; 
+    margin: 2px 0;
+
+}
+
+
+
+
