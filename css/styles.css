@@ -3,6 +3,15 @@
     background-color: #a4aeb9;
 }
 
+.panel-default>.panel-heading {
+color: #333;
+background-color: #f5f5f5;
+border-color: #ddd;
+height: 31px;
+padding: 1.5px 0px;
+}
+
+
 .table>thead>tr>th {
     border-bottom: 2px solid #93999e;
 }
