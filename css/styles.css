@@ -26,9 +26,12 @@ padding: 1.5px 0px;
     color: #24B8EC;
     padding: 3px 0; 
     margin: 2px 0;
-
 }
 
+.panel-default .scroll{
+    height: 150px;
+    overflow: scroll;
+}
 
 
 
