@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
@@ -7,6 +7,11 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-route.min.js"></script>
+    <script src="lib/angular/angular-animate.min.js"></script>
+    <script src= "js/app.js"></script>
+    <script src="js/controllers.js"></script>
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -29,7 +34,7 @@
         <!-- Table1 -->
         <div class="row">
         <div class="col-md-1 table_style">
-        <table class="table fundamental_scroll">
+        <table class="table fundamental_scroll" ng-controller="fundmentalCourses">
           <thead>
           </thead>
           <tbody>
