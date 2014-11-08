@@ -114,7 +114,7 @@
               </div>
               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                  <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                  <button type="button" class="btn btn-primary btn-sm" id ="drag1" draggable="true" ondragstart="drag(event)">Small button</button>
                 </div>
               </div>
             </div>
@@ -242,12 +242,12 @@
     }
 
     function drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
+      ev.dataTransfer.setData("id", ev.target.id);
     }
 
     function drop(ev) {
       ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
+      var data = ev.dataTransfer.getData("id");
       ev.target.appendChild(document.getElementById(data));
     }
 
