@@ -37,7 +37,20 @@ padding: 1.5px 0px;
 .panel-default .scroll2{
     height: 140px;
     overflow: scroll;
+    display: block;
 }
 
 
+
+.panel-default .fundamental_scroll{
+    height: 160px;
+    overflow: scroll;
+    display: block;
+    margin: 0px;
+}
+
+
+.panel-default .table_style{
+     margin: 0px;
+}
 
