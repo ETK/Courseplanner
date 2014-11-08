@@ -11,7 +11,8 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
-	</head>
+	   
+  </head>
 	<body>
     <div class = "container"><!-- start of container-->
      <div class="row">
@@ -113,7 +114,7 @@
               </div>
               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                  <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                  <button type="button" class="btn btn-primary btn-sm" id ="drag1" draggable="true" ondragstart="drag(event)">Small button</button>
                 </div>
               </div>
             </div>
@@ -173,8 +174,8 @@
             </thead>
             <tbody>
               <tr>
-                <td class="panel-title col-md-1" >2012</td>
-                <td class="panel-title col-md-7"></td>
+                <td class="panel-title col-md-1">2012</td>
+                <td class="panel-title col-md-7" style="height:50px;width:100px" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
               </tr>
               <tr>
                 <td class="panel-title col-md-1" >2013</td>
@@ -235,5 +236,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-	</body>
+	
+    <script>
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("id", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("id");
+      ev.target.appendChild(document.getElementById(data));
+    }
+
+    </script>
+
+  </body>
 </html>
