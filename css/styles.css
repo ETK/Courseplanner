@@ -29,7 +29,13 @@ padding: 1.5px 0px;
 }
 
 .panel-default .scroll{
-    height: 150px;
+    height: 160px;
+    overflow: scroll;
+
+}
+
+.panel-default .scroll2{
+    height: 140px;
     overflow: scroll;
 }
 
