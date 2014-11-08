@@ -11,7 +11,8 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
-	</head>
+	   
+  </head>
 	<body>
     <div class = "container"><!-- start of container-->
      <div class="row">
@@ -168,16 +169,14 @@
             </thead>
             <tbody>
               <tr>
-                <td>Mark</td>
-                <td>Otto</td>
+                <td style="height:50px;width:100px" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
               </tr>
               <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
+                <td></td>
+                
               </tr>
               <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -230,5 +229,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-	</body>
+	
+    <script>
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+
+    </script>
+
+  </body>
 </html>
