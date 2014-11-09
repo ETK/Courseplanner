@@ -7,9 +7,12 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/data.json"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
+    <script src="lib/underscore.js"></script>
+    
     <script src= "js/app.js"></script>
     <script src="js/controllers.js"></script>
 		<!--[if lt IE 9]>
@@ -19,12 +22,12 @@
 	   
   </head>
 	<body>
-    <div class = "container"><!-- start of container-->
+    <div class = "container" ><!-- start of container-->
      <div class="row">
       <div class="title">
        Fundamental Courses
       </div> 
-      <div class ="panel panel-default">
+      <div class ="panel panel-default" ng-controller="fundmentalCourses">
         <div class="panel-heading">
         <div class="panel-title col-md-1">Area</div>
         <div class="panel-title col-md-1">Level</div>
@@ -34,34 +37,14 @@
         <!-- Table1 -->
         <div class="row">
         <div class="col-md-1 table_style">
-        <table class="table fundamental_scroll" ng-controller="fundmentalCourses">
+        <table class="table fundamental_scroll" >
           <thead>
           </thead>
-          <tbody>
+          <tbody ng-repeat="area in areas">
             <tr>
-              <td>1</td>
+              <td ng-click="getLevels(area)">{{area}}</td>
             </tr>
-            <tr>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>7</td>
-            </tr>
-            <tr>
-              <td>8</td>
-            </tr>
+        
           </tbody>
         </table> <!-- End of Table1 -->
         </div>
@@ -71,18 +54,9 @@
         <table class="table fundamental_scroll">
           <thead>
           </thead>
-          <tbody>
+          <tbody ng-repeat="level in levels">
             <tr>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>4</td>
+              <td ng-click="getCourses(level)">{{level}}</td>
             </tr>
           </tbody>
         </table> <!-- End of Table2 -->
@@ -93,33 +67,9 @@
         <table class="table fundamental_scroll">
           <thead>
           </thead>
-          <tbody>
+          <tbody ng-repeat="course in courses">
             <tr>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <td>the Bird</td>
-            </tr>
-            <tr>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <td>the Bird</td>
-            </tr>
-            <tr>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <td>the Bird</td>
+              <td>{{course.course_code}}</td>
             </tr>
           </tbody>
         </table> <!-- End of Table3 -->
