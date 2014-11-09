@@ -23,7 +23,7 @@ padding: 1.5px 0px;*/
 
 .area_code{
 	font-weight: bold;
-	line-height: 40px;
+	line-height: 25px;
 }
 
 .panel-title {
@@ -67,6 +67,19 @@ padding: 1.5px 0px;*/
 
 .rows-striped > .row:nth-child(even){
 	background-color: #efefef;
+}
+
+.rows-striped_1 > .row:nth-child(even){
+	background-color: #efefef;
+}
+
+.rows-striped_1 > .row:hover {
+	background-color: #4fc1e9;
+}
+
+.rows-striped_1 > .row:active {
+	background-color: #3bafda;
+    color: white;
 }
 
 .col-session {
