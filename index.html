@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 	<head>
@@ -26,9 +27,17 @@
       </div> 
       <div class ="panel panel-default">
         <div class="panel-heading">
-        <div class="panel-title col-md-1">Area</div>
-        <div class="panel-title col-md-1">Level</div>
-        <div class="panel-title col-md-10">Courses</div> 
+			<div class="row">
+				<div class="col-xs-1">
+					<h3 class="panel-title">Area</h3>
+				</div>
+				<div class="col-xs-1">
+					<h3 class="panel-title">Level</h3>
+				</div>
+				<div class="col-xs-10">
+					<h3 class="panel-title">Courses</h3>
+				</div>
+			</div>
        </div>
         
         <!-- Table1 -->
@@ -137,8 +146,15 @@
       </div> 
       <div class ="panel panel-default">
         <div class="panel-heading">
-        <div class="panel-title col-md-3">Area</div>
-        <div class="panel-title col-md-9">Courses</div> 
+			<div class="row">
+						
+				<div class="col-xs-3">
+					<h3 class="panel-title">Area</h3>
+				</div>
+				<div class="col-xs-9">
+					<h3 class="panel-title">Courses</h3>
+				</div>
+			</div>
        </div>
         
         <!-- Table1 -->
@@ -219,152 +235,437 @@
 
 
 <!-- Plan your Timetable Section -->
-     <div class="row">
-      <div class = "title">
-       Plan your Timetable
-      </div> 
-      <div class="panel panel-default">
-       <div class="panel-heading">
-        <div class="panel-title col-md-4">Saved Courses</div>
-        <div class="panel-title col-md-1">Session</div>
-        <div class="panel-title col-md-7">Course List</div> 
-       </div>
-        <div class="row">
-          <!-- Saved course list -->
-          <div class="col-md-4 scroll">
-           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    100 level
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                  <button type="button" class="btn btn-primary btn-sm" id ="drag1" draggable="true" ondragstart="drag(event)">Small button</button>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    200 level
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit.
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    300 level
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit.
-                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
 
-                  List item one
-                  List item two
-                  List item three
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingFour">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
-                    400 level
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                <div class="panel-body">
-                  Anim pariatur cliche reprehenderit.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Table -->
-        <div class="col-md-8">
-          <table class="table scroll2">
-            <thead>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="panel-title col-md-1">2012</td>
-                <td class="panel-title col-md-7" style="height:50px;width:100px" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-              </tr>
-              <tr>
-                <td class="panel-title col-md-1" >2013</td>
-                <td class="panel-title col-md-7"></td>
-              </tr>
-              <tr>
-                <td class="panel-title col-md-1" >2014</td>
-                <td class="panel-title col-md-7"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-      </div><!-- end of the row -->
-     </div> 
-    </div><!-- end of the row -->
+	 
+	<div class="row">
+	
+		<div class="title">Plan your timetable <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for Plan your time table"></span></div>
 
+		<div class="panel panel-default">
+			
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-4">
+						<h3 class="panel-title">Saved Course</h3>
+					</div>
+					<div class="col-xs-8">
+						<div class="row">
+							<div class="col-xs-3">
+								<h3 class="panel-title">Session</h3>
+							</div>
+							<div class="col-xs-9">
+								<h3 class="panel-title">Course List</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body no-padding">
+				<div class="col-xs-4 col-savedcourse" style="font-size: 12px;">
+					<div class="row">
+						
+						<div class="panel-group accordion-menu" id="menu-savedCourse" role="tablist" aria-multiselectable="true">
+							
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading-course100">
+									<h4 class="panel-title" data-toggle="collapse" data-parent="#menu-savedCourse" href="#collapse-courses100" aria-expanded="true" aria-controls="collapse 100 level courses">100 Level</h4>
+								</div>
+								<div class="panel-collapse collapse in" id="collapse-courses100" role="tabpanel" aria-labelledby="heading-courses100">
+									<div class="panel-body">
+										<div class="thumbnail-group flex-center">
+											<div class="thumbnail course-block">
+												<div class="course selected">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											
+											<div class="thumbnail course-block">
+												<div class="course selected">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading-course200">
+									<h4 class="panel-title" data-toggle="collapse" data-parent="#menu-savedCourse" href="#collapse-courses200" aria-expanded="true" aria-controls="collapse 200 level courses">200 Level</h4>
+								</div>
+							
+								<div class="panel-collapse collapse" id="collapse-courses200" role="tabpanel" aria-labelledby="heading-courses200">
+									<div class="panel-body">
+										<div class="thumbnail-group flex-center">
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading-course300">
+									<h4 class="panel-title" data-toggle="collapse" data-parent="#menu-savedCourse" href="#collapse-courses300" aria-expanded="true" aria-controls="collapse 300 level courses">300 Level</h4>
+								</div>
+							
+								<div class="panel-collapse collapse" id="collapse-courses300" role="tabpanel" aria-labelledby="heading-courses300">
+									<div class="panel-body">
+										<div class="thumbnail-group flex-center">
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading-course400">
+									<h4 class="panel-title" data-toggle="collapse" data-parent="#menu-savedCourse" href="#collapse-courses400" aria-expanded="true" aria-controls="collapse 400 level courses">400 Level</h4>
+								</div>
+							
+								<div class="panel-collapse collapse" id="collapse-courses400" role="tabpanel" aria-labelledby="heading-courses400">
+									<div class="panel-body">
+										<div class="thumbnail-group flex-center">
+											<div class="thumbnail course-block">
+												<div class="course">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+													<label class="courseCode">CSC 343</label>
+													<label class="courseDesc"><small>C Programming</small></label>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					
+				</div><!-- End of Savd Course Panel -->
+				<div class="col-xs-8 rows-striped col-courselist">
+					<div class="row">
+						<div class="col-xs-3 col-session">2012, 9</div>
+						<div class="col-xs-9">
+							<div class="thumbnail-group flex-left">
+								<div class="thumbnail course-block block-success">
+									<div class="course" data-toggle="modal" data-target="#coursePropModal">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+										<label class="courseCode">CSC 343</label>
+										<label class="courseDesc"><small>C Programming</small></label>
+									</div>
+								</div>
+								
+								<div class="thumbnail course-block block-success">
+									<div class="course" data-toggle="modal" data-target="#coursePropModal">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+										<label class="courseCode">CSC 343</label>
+										<label class="courseDesc"><small>C Programming</small></label>
+									</div>
+								</div>
+								
+								<div class="thumbnail course-block block-danger" data-toggle="tooltip" data-placement="bottom" title="This CSC343 does not offer this semester, please fill in other spots.">
+								</div>
+								
+								<div class="thumbnail course-block block-danger" data-toggle="tooltip" data-placement="bottom" title="This CSC343 does not offer this semester, please fill in other spots.">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-session">2013, 5</div>
+						<div class="col-xs-9">
+							<div class="thumbnail-group flex-left">
+								<div class="thumbnail course-block block-success">
+									
+									<div class="course" data-toggle="modal" data-target="#coursePropModal">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+										<label class="courseCode">CSC 343</label>
+										<label class="courseDesc"><small>C Programming</small></label>
+									</div>
+								</div>
+								
+								<div class="thumbnail course-block block-success">
+								</div>
+								
+								<div class="thumbnail course-block block-success">
+								</div>
+								
+								<div class="thumbnail course-block block-danger"  data-toggle="tooltip" data-placement="top" title="This CSC343 does not offer this semester, please fill in other spots.">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-session">2013, 9</div>
+						<div class="col-xs-9">
+							<div class="thumbnail-group flex-left">
+								<div class="thumbnail course-block block-success">
+									<div class="course" data-toggle="modal" data-target="#coursePropModal">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+										<label class="courseCode">CSC 343</label>
+										<label class="courseDesc"><small>C Programming</small></label>
+									</div>
+								</div>
+								<div class="thumbnail course-block block-success">
+									<div class="course" data-toggle="modal" data-target="#coursePropModal">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+										<label class="courseCode">CSC 343</label>
+										<label class="courseDesc"><small>C Programming</small></label>
+									</div>
+								</div>
+								<div class="thumbnail course-block block-success">
+									<div class="course">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+										<label class="courseCode">CSC 343</label>
+										<label class="courseDesc"><small>C Programming</small></label>
+									</div>
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-xs-3 col-session">2014, 5</div>
+						<div class="col-xs-9">
+							<div class="thumbnail-group flex-left">
+								<div class="thumbnail course-block block-success">
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-session">2014, 9</div>
+						<div class="col-xs-9">
+							<div class="thumbnail-group flex-left">
+								<div class="thumbnail course-block block-success">
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+								<div class="thumbnail course-block block-success">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+	
+		<div class="title">Graduation Requirement <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for Graduation Requirement"></span></div>
 
+		<div class="panel panel-default">
+			
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-4">
+						<h3 class="panel-title">Saved Course</h3>
+					</div>
+					<div class="col-xs-8">
+						<h3 class="panel-title">Course List</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body rows-striped">
+				<div class="row">
+					<div class="col-xs-3 col-session">Required CSC <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for Required CSC"></span></div>
+					<div class="col-xs-9">
+						<div class="thumbnail-group flex-left">
+							<div class="thumbnail course-block block-success">
+								<div class="course">
+									<span class="glyphicon glyphicon-remove-circle"></span>
+									<label class="courseCode">CSC 343</label>
+									<label class="courseDesc"><small>C Programming</small></label>
+								</div>
+							</div>
+							<div class="thumbnail course-block block-success">
+								<div class="course">
+									<span class="glyphicon glyphicon-remove-circle"></span>
+									<label class="courseCode">CSC 343</label>
+									<label class="courseDesc"><small>C Programming</small></label>
+								</div>
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-3  col-session">Required MAT/STA <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for Required MAT/STA"></span></div>
+					<div class="col-xs-9">
+						<div class="thumbnail-group flex-left">
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-3  col-session">CSC/ECE/BCB 400+ <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for CSC/ECE/BCB 400+"></span></div>
+					<div class="col-xs-9">
+						<div class="thumbnail-group flex-left">
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-3  col-session">CSC Electives <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for ECE Elective"></span></div>
+					<div class="col-xs-9">
+						<div class="thumbnail-group flex-left">
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+						</div>
+					</div>
+				</div><div class="row">
+					<div class="col-xs-3  col-session">MAT/STA Electives <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for MAT/STA Electives"></span></div>
+					<div class="col-xs-9">
+						<div class="thumbnail-group flex-left">
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+							<div class="thumbnail course-block block-success">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
 
-     <div class="row">
-      <div class = "title">
-       Graduation Requirement
-      </div> 
-      <div class="panel panel-default">
-        <!-- Table -->
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Saved Courses</th>
-              <th>Session</th>
-              <th>Course List</th> 
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-     </div> <!-- end of the row -->
-    </div><!-- end of container-->
+	<!-- Modal -->
+	<div class="modal fade" id="coursePropModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><span class="glyphicon glyphicon-remove-circle"></span></span><span class="sr-only">Close</span></button>
+			<h3 class="modal-title" id="coursePropModalLabel">CSC 428H1 Human-Computer interaction</h3>
+		  </div>
+		  <div class="modal-body">
+			<h4 class="modal-subtitle">Description</h4>
+			<p>Understanding humanbehaviour as it applies to user intefaces: work activity analysis, observation ... </p>
+			<h4 class="modal-subtitle">Prerequisite:</h4>
+			<p><span class="courseTag tag-success">CSC 318</span> ; ( <span class="courseTag">STA 247</span> / <span class="courseTag tag-selected">STA 255</span> ) / ( <span class="courseTag">PSY 201</span> ; <span class="courseTag tag-success">SOC 201</span> ) </p>
+			<h4 class="modal-subtitle">Exclusion:</h4>
+			<p><span class="courseTag">CSC 447</span></p>
+			
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-theme">Add to List</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	 
+	 
+	 
+	 
+	</div><!-- end of container-->
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="lib/jquery/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	
     <script>
 
@@ -383,6 +684,18 @@
     }
 
     </script>
+	
+	<script>
+		
+		$(document).ready(function (){
+			$('.course-block').click(function (event){
+				$(event.target).closest('.course').toggleClass('selected');
+			})
+			
+			$('.course-block, .glyphicon-question-sign').tooltip()
+		})
+	
+	</script>
 
   </body>
 </html>
