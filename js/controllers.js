@@ -18,7 +18,6 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
       }),function(course){return course["Level"]})
       .map(function(course){return course["Level"]});
       $scope.selectedArea = area;
-
      }
 
      $scope.getCourses = function(level){
