@@ -15,6 +15,17 @@ border-color: #ddd;
 padding: 1.5px 0px;*/
 }
 
+.course_code{
+	font-weight: bold;
+	line-height: 20px;
+
+}
+
+.area_code{
+	font-weight: bold;
+	line-height: 40px;
+}
+
 .panel-title {
 	color: #fff;
 }
@@ -36,27 +47,15 @@ padding: 1.5px 0px;*/
     margin: 2px 0;*/
 }
 
-.panel-default .scroll{
-    height: 160px;
-    overflow: scroll;
-
+.fundamental_courses {
+	height: 160px;
+	overflow-y: scroll;
 }
 
-.panel-default .scroll2{
-    height: 140px;
-    overflow: scroll;
-    display: block;
+.course_margin{
+	padding-left: 5px;
 }
-
-
-
-.panel-default .fundamental_scroll{
-    height: 160px;
-    overflow: scroll;
-    display: block;
-    margin: 0px;
-}
-
+/*above lichuanr*/
 
 .panel-default .table_style{
      margin: 0px;
@@ -140,6 +139,7 @@ padding: 1.5px 0px;*/
 	height: 360px;
 	overflow-y: scroll;
 }
+
 
 	
 
