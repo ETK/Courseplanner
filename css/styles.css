@@ -1,3 +1,7 @@
+body {
+	overflow-y: scroll;
+}
+
 
 .panel-default>.table>thead{
     background-color: #a4aeb9;
@@ -7,8 +11,12 @@
 color: #333;
 background-color: #a4aeb9;
 border-color: #ddd;
-height: 31px;
-padding: 1.5px 0px;
+/*height: 31px;
+padding: 1.5px 0px;*/
+}
+
+.panel-title {
+	color: #fff;
 }
 
 
@@ -24,8 +32,8 @@ padding: 1.5px 0px;
     font-size: 26px;
     font-style: Arial;
     color: #24B8EC;
-    padding: 3px 0; 
-    margin: 2px 0;
+    /*padding: 3px 0; 
+    margin: 2px 0;*/
 }
 
 .panel-default .scroll{
@@ -53,4 +61,204 @@ padding: 1.5px 0px;
 .panel-default .table_style{
      margin: 0px;
 }
+
+.thumbnail-group {
+	
+}
+
+.rows-striped > .row:nth-child(even){
+	background-color: #efefef;
+}
+
+.col-session {
+	margin: 10px auto;
+	line-height: 70px;
+	font-weight: bold;
+}
+
+.flex-left {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.flex-center {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.thumbnail-group > .thumbnail {
+	display: inline-block;
+	margin: 10px 10px 10px 0;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+
+
+.accordion-menu .panel{
+	border-radius: 0px;
+}
+
+.accordion-menu .panel+.panel{
+	margin-top: 0;
+}
+
+.accordion-menu .panel .panel-heading{
+	border-top-right-radius: 0px; 
+	border-top-left-radius: 0px; 
+	cursor: pointer;
+}
+
+.accordion-menu .panel-heading .panel-title{
+	text-align: center;
+}
+
+.glyphicon {
+	color: black;
+	cursor: pointer;
+	vertical-align: text-top;
+	font-size: 14px;
+}
+
+.glyphicon:hover {
+	color: red;
+}
+
+.col-savedcourse .panel-body{
+	min-height: 204px;
+}
+
+.col-savedcourse, .col-courselist {
+	height: 360px;
+	overflow-y: scroll;
+}
+
+	
+
+
+.course-block{
+	width: 100px;
+	height: 60px;
+	position: relative;
+}
+
+	
+	
+	.course-block.block-success{
+		background-color: transparent;
+		border-color: #a0d468; /* green */
+	}
+	
+	
+	.course-block.block-danger{
+		background-color: transparent;
+		border-color: #ed5565; /* red */
+	}
+	
+	.course-block:hover {
+		border-color: #555;
+	}
+	
+	
+
+.course{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background-color: #efefef;
+	color:#ccc;
+	font-size: 12px;
+	
+	-webkit-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+}
+	
+	
+	
+	.course .glyphicon {
+		position: absolute;
+		top: 3px;
+		right: 3px;
+		color: #555;
+		opacity: 0;
+		
+		-webkit-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	}
+	
+		.course:hover .glyphicon {
+			opacity: 1;
+		}
+	
+		.glyphicon:hover {
+			color: #ed5565; /* red */
+		}
+		
+		
+	.course .courseCode {
+		width: 100%;
+		text-align: center;
+		margin: 12px 0px 0px;
+	}
+
+	.course .courseDesc{
+		width: 100%;
+		text-align: center;
+	}
+	
+	.course.selected{
+		background-color: #4fc1e9; /* blue */
+		color: #fff;
+	}
+	
+	.block-danger .course{
+		background-color: #ed5565;
+		color: #fff;
+	}
+	
+	.block-success .course{
+		background-color: #a0d468;
+		color: #fff;
+	}
+
+	
+		
+		.course:hover {
+			color: #555;
+		}
+
+.courseTag {
+	background: #cfcfcf;
+	padding: 5px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+	.courseTag.tag-success {
+		background-color: #a0d468; /* green */
+	}
+
+	.courseTag.tag-selected {
+		background-color: #4fc1e9; /* blue */
+	}
+		
+		
+.modal-header .close .glyphicon-remove-circle,
+.modal .modal-title, 
+.modal .modal-subtitle {
+	color: #4fc1e9; /* blue */
+} 
+
+.btn-theme {
+	background-color: #4fc1e9; /* blue */
+	color: #fff;
+}	
 
