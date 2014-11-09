@@ -1,9 +1,38 @@
 var appControllers = angular.module('appControllers', []);
 
 appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
-  $http.get('/js/data.json').success(function(data) {
-    console.log(data);
-  });
+  	 $scope.areas = _.uniq(data,function(course){
+        return course["course_code"].substr(0,3);
+     }).map(function(course){return course["course_code"].substr(0,3)});
+     $scope.levels = [];
+     $scope.courses =[];
+     $scope.selectedLevel ="";
+     $scope.selectedArea ="";
+    
+  
+
+     $scope.getLevels = function(area){
+      console.log(area);
+      $scope.levels = _.uniq(data.filter(function(course){
+          return course["course_code"].substr(0,3) == area;
+      }),function(course){return course["Level"]})
+      .map(function(course){return course["Level"]});
+      $scope.selectedArea = area;
+
+     }
+
+     $scope.getCourses = function(level){
+      if ($scope.selectedArea=="") return;
+
+      $scope.courses = data.filter(function(course){
+          return (course["course_code"].substr(0,3) ==$scope.selectedArea)&& (course["Level"]==level);
+      });
+
+
+
+     }
+
+     console.log($scope.areas);
 }]);
 
 

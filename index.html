@@ -8,9 +8,12 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/data.json"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
+    <script src="lib/underscore.js"></script>
+    
     <script src= "js/app.js"></script>
     <script src="js/controllers.js"></script>
 		<!--[if lt IE 9]>
@@ -20,15 +23,16 @@
 	   
   </head>
 	<body>
-    <div class = "container"><!-- start of container-->
 
+    <div class = "container"><!-- start of container-->
     <!-- Fundamental Courses Section -->
      <div class="row">
       <div class="title">
        Fundamental Courses
       </div> 
-      <div class ="panel panel-default">
-		<div class="panel-heading">
+
+      <div class ="panel panel-default" ng-controller="fundmentalCourses">
+        <div class="panel-heading">
 			<div class="row">
 				<div class="col-xs-1">
 					<h3 class="panel-title">Area</h3>
@@ -41,7 +45,6 @@
 				</div>
 			</div>
 		</div>
-        
  
 	  <div class="panel-body"  style="font-size: 12px; padding: 4px;">
 	  	<div class="col-xs-1 rows-striped fundamental_courses "  style="border-right: 1px solid #e1e4e9;">
