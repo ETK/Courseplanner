@@ -12,7 +12,7 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
   
 
      $scope.getLevels = function(area){
-      console.log(area);
+      //console.log(area);
       $scope.levels = _.uniq(data.filter(function(course){
           return course["course_code"].substr(0,3) == area;
       }),function(course){return course["Level"]})
@@ -23,15 +23,22 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
      $scope.getCourses = function(level){
       if ($scope.selectedArea=="") return;
 
-      $scope.courses = data.filter(function(course){
+     var courses = data.filter(function(course){
           return (course["course_code"].substr(0,3) ==$scope.selectedArea)&& (course["Level"]==level);
       });
 
-
-
+       $scope.course_set= [];
+      //console.log(courses.length);
+      _.each(_.range(courses.length),function(i){
+          if ($scope.course_set[(i/4)|0] ==null){
+            $scope.course_set[(i/4)|0]  = [];
+          }
+          $scope.course_set[(i/4)|0].push(courses[i]);
+      });
+      //console.log($scope.course_set);
      }
 
-     console.log($scope.areas);
+     //console.log($scope.areas);
 }]);
 
 
