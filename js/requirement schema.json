@@ -1,0 +1,292 @@
+{
+    "area": "CSC",
+    "requirement": {
+        "1": {
+            "FCE": 2.5,
+            "rules": {
+                "CSC": "(CSC108H1,CSC148H1)/CSC150H1,CSC165H1/CSC240H1",
+                "MAT": "(MAT135H1, MAT136H1)/MAT137Y1/MAT157Y1"
+            },
+            "rules_statements": {
+                "includes": [
+                    [
+                        "CSC108",
+                        "CSC150"
+                    ],
+                    [
+                        "CSC148",
+                        "CSC150"
+                    ],
+                    [
+                        "CSC165",
+                        "CSC240"
+                    ],
+                    [
+                        "MAT135",
+                        "MAT137",
+                        "MAT157"
+                    ],
+                    [
+                        "MAT136",
+                        "MAT137",
+                        "MAT157"
+                    ]
+                ],
+                "excludes": [],
+                "include_level": []
+            }
+        },
+        "2": {
+            "FCE": 3.5,
+            "rules": {
+                "CSC": "CSC207H1, CSC209H1, CSC236H1/CSC240H1, CSC258H1, CSC263H1/CSC265H1",
+                "MAT": "MAT221H1/MAT223H1/MAT240H1",
+                "STA": "STA247H1/STA255H1/STA257H1"
+            },
+            "rules_statements": {
+                "includes": [
+                    [
+                        "CSC207"
+                    ],
+                    [
+                        "CSC209"
+                    ],
+                    [
+                        "CSC236",
+                        "CSC240"
+                    ],
+                    [
+                        "CSC258"
+                    ],
+                    [
+                        "CSC263",
+                        "CSC265"
+                    ],
+                    [
+                        "MAT221",
+                        "MAT223",
+                        "MAT240"
+                    ],
+                    [
+                        "STA247",
+                        "STA255",
+                        "STA257"
+                    ]
+                ],
+                "excludes": [],
+                "include_level": []
+            }
+        },
+        "3": {
+            "FCE": 6,
+            "rules": {
+                "CSC": "CSC369H1, CSC373H1/CSC375H1"
+            },
+            "rules_statements": {
+                "includes": [
+                    [
+                        "CSC369"
+                    ],
+                    [
+                        "CSC373",
+                        "CSC375"
+                    ]
+                ],
+                "excludes": [],
+                "include_level": []
+            }
+        },
+        "4": {}
+    },
+    "areas": [
+        {
+            "name": "Scientific Computing",
+            "courses": [
+                "CSC320",
+                "CSC321",
+                "CSC336",
+                "CSC343",
+                "CSC358",
+                "CSC384",
+                "CSC411",
+                "CSC418",
+                "CSC446",
+                "CSC456",
+                "CSC458"
+            ]
+        },
+        {
+            "name": "Artificial Intelligence",
+            "courses": [
+                "CSC310",
+                "CSC320",
+                "CSC321",
+                "CSC384",
+                "CSC401",
+                "CSC411",
+                "CSC412",
+                "CSC420",
+                "CSC438",
+                "CSC448",
+                "CSC463",
+                "CSC485",
+                "CSC486"
+            ]
+        },
+        {
+            "name": "Natural Language Processing",
+            "courses": [
+                "CSC309",
+                "CSC318",
+                "CSC321",
+                "CSC401",
+                "CSC411",
+                "CSC428",
+                "CSC485",
+                "CSC486"
+            ]
+        },
+        {
+            "name": "Computer Vision",
+            "courses": [
+                "CSC320",
+                "CSC336",
+                "CSC411",
+                "CSC412",
+                "CSC418",
+                "CSC420"
+            ]
+        },
+        {
+            "name": "Computer System",
+            "courses": [
+                "CSC301",
+                "CSC309",
+                "CSC324",
+                "CSC343",
+                "CSC358",
+                "CSC372",
+                "ECE385",
+                "CSC410",
+                "CSC443",
+                "CSC458",
+                "CSC469",
+                "CSC488",
+                "CSC489"
+            ]
+        },
+        {
+            "name": "Artificial Intelligence",
+            "courses": [
+                "CSC310",
+                "CSC320",
+                "CSC321",
+                "CSC384",
+                "CSC401",
+                "CSC411",
+                "CSC412",
+                "CSC420",
+                "CSC438",
+                "CSC448",
+                "CSC463",
+                "CSC485",
+                "CSC486"
+            ]
+        },
+        {
+            "name": "Video Game",
+            "courses": [
+                "CSC300",
+                "CSC301",
+                "CSC318",
+                "CSC324",
+                "CSC384",
+                "CSC404",
+                "CSC418"
+            ]
+        },
+        {
+            "name": "Human-Computer Interaction",
+            "courses": [
+                "CSC300",
+                "CSC301",
+                "CSC309",
+                "CSC318",
+                "CSC320",
+                "CSC321",
+                "CSC343",
+                "CSC384",
+                "CSC401",
+                "CSC404",
+                "CSC418",
+                "CSC428",
+                "CSC485",
+                "CSC490",
+                "CSC491"
+            ]
+        },
+        {
+            "name": "Theory of Computation",
+            "courses": [
+                "CSC310",
+                "CSC336",
+                "CSC438",
+                "CSC448",
+                "CSC463"
+            ]
+        },
+        {
+            "name": "Web Technologies",
+            "courses": [
+                "CSC309",
+                "CSC310",
+                "CSC343",
+                "CSC358",
+                "CSC411",
+                "CSC443",
+                "CSC443",
+                "CSC458",
+                "CSC469"
+            ]
+        },
+        {
+            "name": "MAT Electives",
+            "courses": [
+                "MAT224",
+                "MAT235",
+                "MAT237",
+                "MAT257"
+            ],
+            "include_level": [
+                "300",
+                "400"
+            ],
+            "excludes": [
+                "MAT329",
+                "MAT390",
+                "MAT391"
+            ]
+        },
+        {
+            "name": "STA Electives",
+            "courses": [
+                "STA249",
+                "STA261"
+            ],
+            "include_level": [
+                "300",
+                "400"
+            ],
+            "excludes": []
+        },
+        {
+            "name": "ECE&BCB Elective",
+            "courses": [
+                "ECE489",
+                "BCB410",
+                "BCB420",
+                "BCB430"
+            ]
+        }
+    ]
+}
