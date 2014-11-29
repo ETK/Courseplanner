@@ -8,7 +8,7 @@ class Extractor:
 
 	def toCourseCodeArray(self):
 		courseCode=[]
-		for pre in re.finditer("\w\w\w\d\d\d(\w\d)?",self.pre,0):
+		for pre in re.finditer("\D\D\D\d\d\d(\D\d)?",self.pre,0):
 			courseCode.append(pre.group(0))
 		return courseCode
 
@@ -20,7 +20,7 @@ class Extractor:
 #log in, select db and collections
 client = MongoClient('mongodb://russ:Li199310112@ds045077.mongolab.com:45077/courseplanner')
 db = client['courseplanner']
-courses = db['coursedata']
+courses = db['courses']
 
 #from prerequisite, for each course code found in prerequisite string, output to an array
 #and put in prerequiste_codes
@@ -28,13 +28,23 @@ courses = db['coursedata']
 	if 'prerequisite' in course:
 		ex = Extractor(course['prerequisite'])
 		preCourseCode = ex.toCourseCodeArray()
-		courses.update({"_id":course["_id"]},{"prerequisite_codes":preCourseCode},True)
-'''
+		course["prerequisite_codes"] = preCourseCode
+		courses.update({"_id":course["_id"]},course,True)
+	'''	
+
 
 #read out prerequisite_codes
-for course in courses.find():
+'''for course in courses.find():
 		if 'prerequisite_codes' in course:
-			print course
-			
+			print course['prerequisite']
+			print course['prerequisite_codes']
+'''
+'''for course in courses.find():
+	if re.match("\D\D\D\D",course['course_code']) != None:
+		print course
+'''
+
+#rename collection to Courses
+#courses.rename("courses")
 
 

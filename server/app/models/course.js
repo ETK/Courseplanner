@@ -16,13 +16,15 @@ var CourseSchema   = new Schema({
         {
             Term: String,
             session_type: String,
-            Last updated: Date,
+            "Last updated": Date,
             session_code: String,
             Session: String,
             Campus: String
         },
     ],
-    Title: String
+    Title: String,
+    prerequisite : String,
+    prerequisite_codes :[String]
 });
 
 module.exports = mongoose.model('Course', CourseSchema);
