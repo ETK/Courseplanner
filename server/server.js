@@ -94,12 +94,12 @@ router.route("/course")
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.post('/api', routes.message);
+//app.post('/api', routes.message);
 
 // app.get('/1', function(req, res) {
 // 	  	res.render('contact.ejs');
 // 	});
-// app.use('/api', router);
+ app.use('/api', router);
 
 // START THE SERVER
 // =============================================================================
