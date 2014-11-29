@@ -8,6 +8,12 @@ var express    = require('express'); 		// call express
 var app        = express(); 				// define our app using express
 var bodyParser = require('body-parser');
 var routes = require('./router')(app);
+var path = require('path');
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // configure app to use bodyParser()
@@ -32,9 +38,13 @@ var router = express.Router(); 				// get an instance of the express Router
 // all of our routes will be prefixed with /api
 app.post('/api', routes.message);
 
-// app.get('/1', function(req, res) {
-// 	  	res.render('contact.ejs');
-// 	});
+
+app.get('/1', function(req, res) {
+	  	res.json('working');
+});
+
+
+
 // app.use('/api', router);
 
 // START THE SERVER

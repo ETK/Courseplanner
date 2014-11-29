@@ -1,0 +1,194 @@
+{
+    "area": "CSC",
+    "areas": [
+        {
+            "name": "Scientific Computing",
+            "courses": [
+                "CSC320",
+                "CSC321",
+                "CSC336",
+                "CSC343",
+                "CSC358",
+                "CSC384",
+                "CSC411",
+                "CSC418",
+                "CSC446",
+                "CSC456",
+                "CSC458"
+            ]
+        },
+        {
+            "name": "Artificial Intelligence",
+            "courses": [
+                "CSC310",
+                "CSC320",
+                "CSC321",
+                "CSC384",
+                "CSC401",
+                "CSC411",
+                "CSC412",
+                "CSC420",
+                "CSC438",
+                "CSC448",
+                "CSC463",
+                "CSC485",
+                "CSC486"
+            ]
+        },
+        {
+            "name": "Natural Language Processing",
+            "courses": [
+                "CSC309",
+                "CSC318",
+                "CSC321",
+                "CSC401",
+                "CSC411",
+                "CSC428",
+                "CSC485",
+                "CSC486"
+            ]
+        },
+        {
+            "name": "Computer Vision",
+            "courses": [
+                "CSC320",
+                "CSC336",
+                "CSC411",
+                "CSC412",
+                "CSC418",
+                "CSC420"
+            ]
+        },
+        {
+            "name": "Computer System",
+            "courses": [
+                "CSC301",
+                "CSC309",
+                "CSC324",
+                "CSC343",
+                "CSC358",
+                "CSC372",
+                "ECE385",
+                "CSC410",
+                "CSC443",
+                "CSC458",
+                "CSC469",
+                "CSC488",
+                "CSC489"
+            ]
+        },
+        {
+            "name": "Artificial Intelligence",
+            "courses": [
+                "CSC310",
+                "CSC320",
+                "CSC321",
+                "CSC384",
+                "CSC401",
+                "CSC411",
+                "CSC412",
+                "CSC420",
+                "CSC438",
+                "CSC448",
+                "CSC463",
+                "CSC485",
+                "CSC486"
+            ]
+        },
+        {
+            "name": "Video Game",
+            "courses": [
+                "CSC300",
+                "CSC301",
+                "CSC318",
+                "CSC324",
+                "CSC384",
+                "CSC404",
+                "CSC418"
+            ]
+        },
+        {
+            "name": "Human-Computer Interaction",
+            "courses": [
+                "CSC300",
+                "CSC301",
+                "CSC309",
+                "CSC318",
+                "CSC320",
+                "CSC321",
+                "CSC343",
+                "CSC384",
+                "CSC401",
+                "CSC404",
+                "CSC418",
+                "CSC428",
+                "CSC485",
+                "CSC490",
+                "CSC491"
+            ]
+        },
+        {
+            "name": "Theory of Computation",
+            "courses": [
+                "CSC310",
+                "CSC336",
+                "CSC438",
+                "CSC448",
+                "CSC463"
+            ]
+        },
+        {
+            "name": "Web Technologies",
+            "courses": [
+                "CSC309",
+                "CSC310",
+                "CSC343",
+                "CSC358",
+                "CSC411",
+                "CSC443",
+                "CSC443",
+                "CSC458",
+                "CSC469"
+            ]
+        },
+        {
+            "name": "MAT Electives",
+            "courses": [
+                "MAT224",
+                "MAT235",
+                "MAT237",
+                "MAT257"
+            ],
+            "include_level": [
+                "300",
+                "400"
+            ],
+            "excludes": [
+                "MAT329",
+                "MAT390",
+                "MAT391"
+            ]
+        },
+        {
+            "name": "STA Electives",
+            "courses": [
+                "STA249",
+                "STA261"
+            ],
+            "include_level": [
+                "300",
+                "400"
+            ],
+            "excludes": []
+        },
+        {
+            "name": "ECE&BCB Elective",
+            "courses": [
+                "ECE489",
+                "BCB410",
+                "BCB420",
+                "BCB430"
+            ]
+        }
+    ]
+}
