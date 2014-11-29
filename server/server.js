@@ -1,7 +1,7 @@
 // server.js
 
 // BASE SETUP
-// =============================================================================
+
 
 // call the packages we need
 var express    = require('express'); 		// call express
@@ -34,6 +34,70 @@ var router = express.Router(); 				// get an instance of the express Router
 
 // more routes for our API will happen here
 
+//OUR CODE
+//=================================================================================
+//connect to mongodb
+var mongoose   = require('mongoose');
+mongoose.connect('mongodb://russ:Li199310112@ds045077.mongolab.com:45077/courseplanner');
+
+//import course schema
+var Course = require("./app/models/course")
+
+router.route('/areas')
+	//
+	.get(function(req,res){
+		Course.aggregate([
+				{$project:{
+
+					dep:{$substr:["$course_code",0,3]}
+				}},
+				{$group:{
+					_id:"$dep"
+				}}
+			],
+			function(err,deps){
+				deps_array = new Array();
+				deps.forEach(function(dep){
+					if(dep._id=="") return;
+					deps_array.push(dep._id);
+				});
+				res.json(deps_array);
+			}
+		);
+	});
+
+router.route('/areas')
+
+router.route("/course")
+.get(function(req,res){
+	Course.find(function(err,data){
+		if (err)
+				res.send(err);
+		res.json(data);
+	});
+
+}).post(function(req, res) {
+		
+		var course = new Course(); 		// create a new instance of the Bear model
+		course.course_code = req.body.code;  // set the bears name (comes from the request)
+
+		// save the bear and check for errors
+		course.save(function(err) {
+			if (err)
+				res.send(err);
+
+			res.json({ message: 'Course created!' });
+		});
+		
+	});
+
+
+
+
+
+
+
+
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.post('/api', routes.message);
@@ -53,8 +117,15 @@ app.listen(port);
 console.log('Magic happens on port ' + port);
 
 
-//connect to mongodb
-var mongoose   = require('mongoose');
-mongoose.connect('mongodb://russ:Li199310112@ds045077.mongolab.com:45077/courseplanner');
+
+
+
+
+
+
+
+
+
+
 
 
