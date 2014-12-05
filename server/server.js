@@ -1,13 +1,19 @@
 // server.js
 
 // BASE SETUP
-// =============================================================================
+
 
 // call the packages we need
 var express    = require('express'); 		// call express
 var app        = express(); 				// define our app using express
 var bodyParser = require('body-parser');
 var routes = require('./router')(app);
+var path = require('path');
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // configure app to use bodyParser()
@@ -190,6 +196,15 @@ router.route("/course")
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 //app.post('/api', routes.message);
+
+
+// app.get('/1', function(req, res) {
+// 	  	res.json('working');
+// });
+
+
+
+// app.use('/api', router);
 
 // app.get('/1', function(req, res) {
 // 	  	res.render('contact.ejs');

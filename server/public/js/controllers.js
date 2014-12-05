@@ -1,8 +1,6 @@
 var appControllers = angular.module('appControllers', []);
 
 appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
-
-
   	 $scope.areas = _.uniq(data,function(course){
         return course["course_code"].substr(0,3);
      }).map(function(course){return course["course_code"].substr(0,3)});
@@ -15,9 +13,6 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
 
      $scope.getLevels = function(area){
       //console.log(area);
-      $http.get('/1').
-        success(function(data, status, headers, config) {
-      });
       $scope.levels = _.uniq(data.filter(function(course){
           return course["course_code"].substr(0,3) == area;
       }),function(course){return course["Level"]})
