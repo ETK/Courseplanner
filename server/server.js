@@ -32,14 +32,109 @@ var router = express.Router(); 				// get an instance of the express Router
 //=================================================================================
 //connect to mongodb
 var mongoose   = require('mongoose');
+var Q = require("q");
 mongoose.connect('mongodb://russ:Li199310112@ds045077.mongolab.com:45077/courseplanner');
 
 //import course schema
-var Course = require("./app/models/course")
+var Course = require("./app/models/course");
+var Program = require("./app/models/program");
+var Requirement = require("./app/models/requirement")
 
-router.route('/areas')
+router.param('programid',function(req,res,next,programid){
+	Program.find({code:programid},function(err,program){
+		if (err || program.length==0){
+			
+			next(new Error("no program found"));
+		}
+		console.log(program)
+		req.program = program[0];
+		next();
+	});
+
+
+});
+router.use(function(err,req,res,next){
+	res.status(500);
+	res.send(err).end();
+
+})
+
+var Promise = function(func){
+	var deferred = Q.defer();
+	func(deferred.resolve,deferred.reject);
+	return deferred.promise;
+
+}
+
+
+var getLevelKey = function (levels){
+	var leveldb ={
+		100 :["100","100/A"],
+		200 :["200","200/B"],
+		300 :["300","300/C"],
+		400 :["400","400/D"]
+
+
+	}
+
+	var results = new Array();
+
+	levels.forEach(function(level){
+		if (leveldb[level])
+			results = results.concat(leveldb[level]);
+	})
+	console.log(results);
+	return results
+
+}
+var getFundCoursesForProgram = function(program){
+
+
+	dep_codes = new Array();
+	
+	if(program.department){
+		program.department.forEach(function(dep){
+			dep_codes.push(new RegExp("^"+dep));
+		})
+	}
+
+	return Promise(function(resolve,reject){
+		Course.find({
+			'course_code': {'$in' : dep_codes},
+			'Level':{'$in':getLevelKey([100,200])},
+		},function(err,courses){
+			resolve(courses);
+		});
+	});
+	/*Promise(function(resolve,reject){
+		Requirement.find({
+			"program": program.code,
+
+
+		})
+
+
+	})
+
+	]);*/
+
+}
+
+
+router.route('/program/:programid/fundcourses')
 	//
 	.get(function(req,res){
+		
+		//get all courses from department
+
+		getFundCoursesForProgram(req.program)
+		.then(function(courses){
+			res.json(courses);
+
+		})
+
+
+        /*
 		Course.aggregate([
 				{$project:{
 
@@ -57,10 +152,10 @@ router.route('/areas')
 				});
 				res.json(deps_array);
 			}
-		);
+		);*/
 	});
 
-router.route('/areas')
+
 
 router.route("/course")
 .get(function(req,res){

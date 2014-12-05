@@ -1,7 +1,6 @@
-{
-    "area": "CSC",
-    "requirement": {
-    "Specialize": [
+[{
+    "program": "ASSPE1689",
+    "set":  [
         {   "level": "1",
             "FCE": 2.5,
             "rules": {
@@ -105,9 +104,11 @@
                 "include_level": []
             }
         }
-        ],
-
-        "Major": [
+    ]
+},
+{
+    "program":"ASMAJ1689",
+    "set":[
             {   
             "level": "1",
             "FCE": 2.5,
@@ -213,9 +214,12 @@
                 "include_level": []
             }
         }
-        ],
-        "Minor": [
-        {   
+    ]
+},
+{
+    "program":"ASMIN1689",
+    "set":[
+            {   
             "level": "1",
             "FCE": 2.5,
             "rules": {
@@ -293,4 +297,4 @@
             }
         }]
     }
-}
+]

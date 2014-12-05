@@ -1,0 +1,48 @@
+/programs
+[program]
+
+program ={
+	code : String
+	title :String
+	designation : enum("MIN","MAJ","SPE")
+}
+
+
+/program/:programid/fundcourses?all=true
+[courses]
+
+#summary
+courses ={
+	course_code: String,
+	title: String,
+	level: String
+
+}
+
+data.level100 = _.filter(courses,function(course){
+	return course["level"]= "100"
+
+})
+
+/program/:programid/fundcourses/areanames
+["name":string]
+/program/:programid/fundcourses/area/:area_name/levels
+[100,200]
+/program/:programid/fundcourses/area/:area_name/levels/:level/courses?all=true
+[courses]
+
+
+
+/programs/:programid/areacourses/areanames
+[name:string]
+
+
+/programs/:programid/areacourses/areanames/:area_name/courses?all = true
+[course]
+
+
+
+
+
+
+

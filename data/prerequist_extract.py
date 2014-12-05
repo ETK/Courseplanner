@@ -34,11 +34,11 @@ courses = db['courses']
 
 
 #read out prerequisite_codes
-'''for course in courses.find():
-		if 'prerequisite_codes' in course:
+for course in courses.find():
+		if 'prerequisite' in course:
 			print course['prerequisite']
-			print course['prerequisite_codes']
-'''
+		#	print course['prerequisite_codes']
+
 '''for course in courses.find():
 	if re.match("\D\D\D\D",course['course_code']) != None:
 		print course
