@@ -45,6 +45,8 @@ mongoose.connect('mongodb://russ:Li199310112@ds045077.mongolab.com:45077/coursep
 var Course = require("./app/models/course");
 var Program = require("./app/models/program");
 var Requirement = require("./app/models/requirement")
+var Areas = require("./app/models/areas")
+
 
 router.param('programid',function(req,res,next,programid){
 	Program.find({code:programid},function(err,program){
@@ -127,11 +129,101 @@ var getFundCoursesForProgram = function(program){
 }
 
 
+var get_area = function (program){
+	dep_areas = new Array();
+	//search for the all departments of certain program
+	if(program.department){
+		program.department.forEach(function(dep){
+			dep_areas.push(dep);
+		});
+	};
+
+	//creating a big Promise object returing back
+	return Promise(function(resolve,reject){
+		Areas.find({'area': {'$in' : dep_areas}}).exec(function(err,results){
+				if(err){
+					reject(new Error(error));
+				}
+				else{
+					//find the specific areas and returing back
+					specific_areas = new Array();
+					console.log(results[0].areas.name);
+					results[0].areas.forEach(function(areas){
+						specific_areas.push(areas.name)
+					});
+					resolve(specific_areas);
+				}
+		});
+	});
+}
+
+
+var get_area_courses = function (program, area_name){
+	//find the program -> area_name (calling the get_area funtion)
+	//if area inside array, 
+		//then print the courses, 
+			//check include courses and level
+			//delete the exclude courses
+	//or give the errors
+
+	return Promise(function(resolve,reject){
+		//this is a first 
+		get_area(program).then(function(areas_array){
+			if(areas_array.indexOf(area_name) == -1)
+			{
+				// We only get here if "matching" fails
+				reject("no mathing areas");
+			}
+		},function (error) {
+			// We only get here if "get_areas" fails
+			reject(new Error(error));
+		});
+
+
+		
+
+		dep_areas = new Array();
+		//search for the all departments of certain program
+		if(program.department){
+			program.department.forEach(function(dep){
+				dep_areas.push(dep);
+			});
+		};
+
+
+		Areas.find( { area: {'$in' : dep_areas}},
+                 { areas: { $elemMatch: { name: area_name } } } ).exec(function(err,results){
+				if(err){
+					reject(new Error(error));
+				}
+				else{
+					//find the specific areas and returing back
+					area_courses = new Array();
+					results[0].areas[0].courses.forEach(function(course_code){
+					area_courses.push(course_code)
+					});
+					resolve(area_courses);
+					
+				}
+		});
+		//adding the courses in the given areas
+	});
+
+	
+
+
+	
+
+}
+
+
+
 router.route('/program/:programid/fundcourses')
 	//
 	.get(function(req,res){
 		
 		//get all courses from department
+
 
 		getFundCoursesForProgram(req.program)
 		.then(function(courses){
@@ -185,6 +277,34 @@ router.route("/course")
 		});
 		
 	});
+
+
+
+///programs/:programid/areacourses/areanames
+//[name:string]
+router.route('/program/:programid/areacourses/areanames')
+.get(function(req,res){	
+	//get all areas from department
+	get_area(req.program)
+	.then(function(courses){
+		res.json(courses);
+	})
+});
+
+
+///program/:programid/areacourses/areanames/:area_name/courses?all = true
+//[course]
+router.route('/program/:programid/areacourses/areanames/:area_name/courses')
+.get(function(req,res){	
+	//get all areas courses from department
+	get_area_courses(req.program, req.params.area_name)
+	.then(function(courses){
+		res.json(courses);
+	},function (error) {
+		// We only get here if "foo" fails
+		res.json(error);
+	});
+});
 
 
 
