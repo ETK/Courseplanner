@@ -2,10 +2,7 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-var AndPair  = new Schema({
-
-    "andpair" :[String]
-})
+var AndPair  = new Schema([String])
 
 var RuleSchema = new Schema({   
             "level": String,
@@ -23,7 +20,10 @@ var RuleSchema = new Schema({
                 ]
                 ,
                 "excludes": [String],
-                "include_level": [String]
+                "include_level": [{
+                    "department" :String,
+                    "level":Number
+                }]
             }
         });
 

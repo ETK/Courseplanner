@@ -9,7 +9,7 @@ var app        = express(); 				// define our app using express
 var bodyParser = require('body-parser');
 var routes = require('./router')(app);
 var path = require('path');
-
+var _ = require('underscore');
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 
@@ -98,32 +98,80 @@ var getFundCoursesForProgram = function(program){
 
 	dep_codes = new Array();
 	
+	//create a regex selector for each department code.
+	//CSC is department code, ^CSC is the regex
 	if(program.department){
 		program.department.forEach(function(dep){
 			dep_codes.push(new RegExp("^"+dep));
 		})
 	}
 
-	return Promise(function(resolve,reject){
+	return Q.spread([Promise(function(resolve,reject){
+		//by department
+
 		Course.find({
 			'course_code': {'$in' : dep_codes},
 			'Level':{'$in':getLevelKey([100,200])},
-		},function(err,courses){
+		},Course.Project.Summary,function(err,courses){
+			console.log("got course by department: "+courses.length+ " found");
 			resolve(courses);
 		});
+	}),
+		//by program requirement
+		Promise(function(resolve,reject){
+			
+			Requirement.aggregate(
+				[{"$match" : {"program":program.code}},
+				{"$unwind" : "$set"},
+				{"$project" :{"level":"$set.level","rules":"$set.rules_statements"}}],
+				function(err,rulesets){
+					resolve(rulesets);
+
+			});
+
+		}).then(function(rulesets){
+			
+			var coursenames =  Array();
+			rulesets.forEach(function(rule){
+				if (rule["rules"]["includes"]==null) return;
+				rule["rules"]["includes"].forEach(function(AndSet){
+					 AndSet.forEach(function(courseToAdd){
+					 	
+					 	if (_.find(coursenames,function(course){
+					 		return course.trim().toLowerCase() == courseToAdd.trim().toLowerCase();
+					 	})==undefined) {
+					 		coursenames.push(courseToAdd);
+						}
+
+					 });
+				});
+
+			});
+			
+			console.log("got coursename from this program requirement: "+coursenames.length+" found");
+			return coursenames;
+		}).then(function(coursenames){
+			return Promise(function(resolve,reject){
+				//create a regex search for each coursename
+				var coursenameRegex = Array(); 
+				coursenames.forEach(function(coursename){
+					coursenameRegex.push(new RegExp("^"+coursename));
+				});
+			
+				Course.find({
+					'course_code':{"$in":coursenameRegex},
+				},Course.Project.Summary,function(err,courses){
+					console.log("got courses for these coursenames: "+courses.length+" found");
+					resolve(courses);
+
+				});
+			});
+		})],
+		function(courseFromDepartment,courseFromRequirement){
+			return courseFromRequirement.concat(courseFromDepartment);
+
 	});
-	/*Promise(function(resolve,reject){
-		Requirement.find({
-			"program": program.code,
-
-
-		})
-
-
-	})
-
-	]);*/
-
+	
 }
 
 
@@ -132,6 +180,7 @@ router.route('/program/:programid/fundcourses')
 	.get(function(req,res){
 		
 		//get all courses from department
+
 
 		getFundCoursesForProgram(req.program)
 		.then(function(courses){

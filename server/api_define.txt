@@ -1,3 +1,5 @@
+prefix api/
+
 /programs
 [program]
 
