@@ -15,9 +15,11 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
 
      $scope.getLevels = function(area){
       //console.log(area);
-      $http.get('/1').
-        success(function(data, status, headers, config) {
-      });
+      var url = 'http://localhost:8080/api/areas';// URL where the Node.js server is running  
+        $http.get(url).success(function(data) {
+         console.log(data);
+        });
+   
       $scope.levels = _.uniq(data.filter(function(course){
           return course["course_code"].substr(0,3) == area;
       }),function(course){return course["Level"]})
