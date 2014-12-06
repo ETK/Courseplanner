@@ -1,0 +1,22 @@
+[
+	{
+		"code":"ASMAJ1689",
+		"title":"Computer Science",
+		"department":["CSC"],
+		"type":"2L"
+	},
+	{	"code":"ASMIN1689",
+		"title":"Computer Science",
+		"department":["CSC"],
+		"type":"2L"
+
+
+	},
+	{"code":"ASSPE1689",
+		"title":"Computer Science",
+		"department":["CSC"],
+		"type":"2L"
+
+	}
+
+]
