@@ -56,9 +56,23 @@ router.param('programid',function(req,res,next,programid){
 		req.program = program[0];
 		next();
 	});
-
+});
+router.param('level',function(req,res,next,level){
+	if (!isNaN(level)){
+		req.level = parseInt(level);
+		next();
+	}else{
+		next(new Error("level should be integer"));
+	}
 
 });
+
+router.param('areaname',function(req,res,next,areaname){
+	req.areaname = areaname.trim().toLowerCase();
+	next();
+
+});
+
 router.use(function(err,req,res,next){
 	res.status(500);
 	res.send(err).end();
@@ -84,15 +98,23 @@ var getLevelKey = function (levels){
 	}
 
 	var results = new Array();
-
-	levels.forEach(function(level){
-		if (leveldb[level])
-			results = results.concat(leveldb[level]);
-	})
-	console.log(results);
-	return results
-
+	if (Array.isArray(levels)){
+		levels.forEach(function(level){
+			if (leveldb[level])
+				results = results.concat(leveldb[level]);
+		});
+		console.log(results);
+		return results;
+	}else{
+		if (leveldb[levels])
+			return leveldb[levels];
+		else
+			return results;
+	}
+	
 }
+
+
 var getFundCoursesForProgram = function(program){
 
 
@@ -169,7 +191,6 @@ var getFundCoursesForProgram = function(program){
 		})],
 		function(courseFromDepartment,courseFromRequirement){
 			return courseFromRequirement.concat(courseFromDepartment);
-
 	});
 	
 }
@@ -178,38 +199,61 @@ var getFundCoursesForProgram = function(program){
 router.route('/program/:programid/fundcourses')
 	//
 	.get(function(req,res){
-		
-		//get all courses from department
-
-
+		//get all courses for this program
 		getFundCoursesForProgram(req.program)
 		.then(function(courses){
 			res.json(courses);
 
-		})
-
-
-        /*
-		Course.aggregate([
-				{$project:{
-
-					dep:{$substr:["$course_code",0,3]}
-				}},
-				{$group:{
-					_id:"$dep"
-				}}
-			],
-			function(err,deps){
-				deps_array = new Array();
-				deps.forEach(function(dep){
-					if(dep._id=="") return;
-					deps_array.push(dep._id);
-				});
-				res.json(deps_array);
-			}
-		);*/
+		}).done();
 	});
 
+router.route('/program/:programid/fundcourses/areanames')
+	//
+	.get(function(req,res){
+		//get all courses for this program
+		getFundCoursesForProgram(req.program)
+		.then(function(courses){
+			 var areas = _.uniq(courses,function(course){
+		        return course["course_code"].substr(0,3);
+		     }).map(function(course){return course["course_code"].substr(0,3)});
+		     res.json(areas);
+
+		}).done();
+	});
+
+router.route('/program/:programid/fundcourses/areanames/:areaname/levels')
+	//
+	.get(function(req,res){
+		//get all courses for this program
+
+		getFundCoursesForProgram(req.program)
+		.then(function(courses){
+			var levels = _.uniq(courses.filter(function(course){
+					        return course["course_code"].substr(0,3) == req.params.areaname;
+					    }),function(course){return course["Level"]})
+					    .map(function(course){return course["Level"]});
+			res.json(levels);
+
+		}).done();
+	});
+
+
+router.route('/program/:programid/fundcourses/areanames/:areaname/levels/:level/courses')
+	//
+	.get(function(req,res){
+		//get all courses for this program
+
+		getFundCoursesForProgram(req.program)
+		.then(function(courses){
+			 var courses = courses.filter(function(course){
+		          return (course["course_code"].substr(0,3).toLowerCase() ==req.areaname)
+		          && (_.find(getLevelKey(req.level),function(level){
+		          		return level == course["Level"];
+		          	})!=undefined);
+		      });
+			res.json(courses);
+		}).done();
+	});
 
 
 router.route("/course")
@@ -222,18 +266,18 @@ router.route("/course")
 
 }).post(function(req, res) {
 		
-		var course = new Course(); 		// create a new instance of the Bear model
-		course.course_code = req.body.code;  // set the bears name (comes from the request)
+	var course = new Course(); 		// create a new instance of the Bear model
+	course.course_code = req.body.code;  // set the bears name (comes from the request)
 
-		// save the bear and check for errors
-		course.save(function(err) {
-			if (err)
-				res.send(err);
+	// save the bear and check for errors
+	course.save(function(err) {
+		if (err)
+			res.send(err);
 
-			res.json({ message: 'Course created!' });
-		});
-		
+		res.json({ message: 'Course created!' });
 	});
+	
+});
 
 
 
