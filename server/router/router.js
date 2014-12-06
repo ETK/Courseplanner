@@ -1,7 +1,3 @@
-var UserSchema = require('../schemas/user');
-var PostsSchema = require('../schemas/posts');
-var ContactSchema = require('../schemas/contact');
-var ReportSchema = require('../schemas/report');
 
 module.exports = function(){
 

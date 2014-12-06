@@ -1,10 +1,22 @@
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
-  	 $scope.areas = _.uniq(data,function(course){
-        return course["course_code"].substr(0,3);
-     }).map(function(course){return course["course_code"].substr(0,3)});
+var toLevelKey ={
+    "100":100,
+    "100/A":200,
+    "200":200,
+    "200/B":200,
+    "300":300,
+    "300/C":300,
+    "400":400,
+    "400/D":400
+  }
 
+
+appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
+  	 $http.get("/api/program/ASSPE1689/fundcourses/areanames").success(function(areanames){
+          $scope.areas = areanames;
+
+     })
      
      $scope.levels = [];
      $scope.courses =[];
@@ -14,38 +26,33 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
   
 
      $scope.getLevels = function(area){
-      //console.log(area);
-        var url = 'http://localhost:8080/api/areas';// URL where the Node.js server is running  
-        $http.get(url).success(function(data) {
-         console.log(data);
+     
+       
+        $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels").success(function(levels) {
+          $scope.levels = levels
         });
-   
-      $scope.levels = _.uniq(data.filter(function(course){
-          return course["course_code"].substr(0,3) == area;
-      }),function(course){return course["Level"]})
-      .map(function(course){return course["Level"]});
-      $scope.selectedArea = area;
+        $scope.selectedArea = area;
      }
 
      $scope.getCourses = function(level){
       if ($scope.selectedArea=="") return;
+      if (toLevelKey[level]==undefined )return;
+    
 
-     var courses = data.filter(function(course){
-          return (course["course_code"].substr(0,3) ==$scope.selectedArea)&& (course["Level"]==level);
+      $scope.course_set= [];
+       
+      $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+$scope.selectedArea+"/levels/"+toLevelKey[level]+"/courses").success(function(courses) {
+        _.each(_.range(courses.length),function(i){
+            if ($scope.course_set[(i/4)|0] ==null){
+              $scope.course_set[(i/4)|0]  = [];
+            }
+            $scope.course_set[(i/4)|0].push(courses[i]);
+        });
       });
-
-       $scope.course_set= [];
-      //console.log(courses.length);
-      _.each(_.range(courses.length),function(i){
-          if ($scope.course_set[(i/4)|0] ==null){
-            $scope.course_set[(i/4)|0]  = [];
-          }
-          $scope.course_set[(i/4)|0].push(courses[i]);
-      });
-      //console.log($scope.course_set);
+          
+     
      }
 
-     //console.log($scope.areas);
 }]);
 
 

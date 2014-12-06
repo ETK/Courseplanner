@@ -27,5 +27,10 @@ var CourseSchema   = new Schema({
     prerequisite_codes :[String]
 });
 
-module.exports = mongoose.model('Course', CourseSchema);
+var Course = mongoose.model('Course', CourseSchema);
 
+
+Course.Project={};
+Course.Project.Summary={"course_code":1,"Level":1,"Title":1,"prerequisite":1};
+
+module.exports  = Course;
