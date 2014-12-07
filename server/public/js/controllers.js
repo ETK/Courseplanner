@@ -2,7 +2,7 @@ var appControllers = angular.module('appControllers', []);
 
 var toLevelKey ={
     "100":100,
-    "100/A":200,
+    "100/A":100,
     "200":200,
     "200/B":200,
     "300":300,
