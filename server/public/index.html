@@ -81,7 +81,7 @@
       <div class="title">
        Advanced Area Courses
       </div> 
-      <div class ="panel panel-default">
+      <div class ="panel panel-default" ng-controller="AdvancedCourses">
 		<div class="panel-heading">
 			<div class="row">
 				<div class="col-xs-2">
@@ -96,43 +96,9 @@
  
 	  <div class="panel-body"  style="font-size: 12px; padding: 4px;">
 	  	<div class="col-xs-2 rows-striped_1 fundamental_courses" style="border-right: 1px solid #e1e4e9;">
-		  	<div class = "row area_code">
-		  		<div>Scientific Computing</div>	
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Artificial Intelligence</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Natural Language Processing</div>	
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Computer Vision</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Computer System</div>	
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Video Game</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Human-Computer Interaction</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Theory of Computation</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>Web Technologies</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>MAT Electives</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>STA Electives</div>
-		  	</div>
-		  	<div class = "row area_code">
-		  		<div>ECE&BCB Electives</div>
-		  	</div>
-
+	  		<div class="row area_code" ng-repeat="area in areas track by $index">
+				<div ng-click="getLevels(area)">{{area}}</div>
+			</div>
 	  	</div>
 	  	<div class="col-xs-10 rows-striped fundamental_courses">
 		<div class="row course_margin">
@@ -505,7 +471,6 @@ ondragstart="drag(event)">
 	</div>
 	
 	<div class="row">
-	
 		<div class="title">Graduation Requirement <span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Tool tips for Graduation Requirement"></span></div>
 
 		<div class="panel panel-default">

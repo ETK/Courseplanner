@@ -382,7 +382,7 @@ router.route('/program/:programid/areacourses/areanames')
 	get_area(req.program)
 	.then(function(courses){
 		res.json(courses);
-	})
+	}).done();
 });
 
 
@@ -397,7 +397,7 @@ router.route('/program/:programid/areacourses/areanames/:area_name/courses')
 	},function (error) {
 		// We only get here if "foo" fails
 		res.json(error);
-	});
+	}).done();
 });
 
 

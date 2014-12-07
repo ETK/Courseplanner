@@ -15,7 +15,6 @@ var toLevelKey ={
 appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
   	 $http.get("/api/program/ASSPE1689/fundcourses/areanames").success(function(areanames){
           $scope.areas = areanames;
-
      })
      
      $scope.levels = [];
@@ -25,9 +24,7 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
     
   
 
-     $scope.getLevels = function(area){
-     
-       
+     $scope.getLevels = function(area){   
         $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels").success(function(levels) {
           $scope.levels = levels
         });
@@ -49,12 +46,51 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
             $scope.course_set[(i/4)|0].push(courses[i]);
         });
       });
-          
-     
      }
 
 }]);
 
+
+appControllers.controller('AdvancedCourses', ['$scope', '$http', function($scope, $http) {
+     console.log("inside the controller");
+     $http.get("/api/program/ASSPE1689/areacourses/areanames").success(function(data){
+          console.log("first part" + data);
+          $scope.areas = data;
+          console.log("second part" + data);
+     })
+     
+     $scope.levels = [];
+     $scope.courses =[];
+     $scope.selectedLevel ="";
+     $scope.selectedArea ="";
+    
+  
+
+     $scope.getLevels = function(area){   
+        $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels").success(function(levels) {
+          $scope.levels = levels
+        });
+        $scope.selectedArea = area;
+     }
+
+     $scope.getCourses = function(level){
+      if ($scope.selectedArea=="") return;
+      if (toLevelKey[level]==undefined )return;
+    
+
+      $scope.course_set= [];
+       
+      $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+$scope.selectedArea+"/levels/"+toLevelKey[level]+"/courses").success(function(courses) {
+        _.each(_.range(courses.length),function(i){
+            if ($scope.course_set[(i/4)|0] ==null){
+              $scope.course_set[(i/4)|0]  = [];
+            }
+            $scope.course_set[(i/4)|0].push(courses[i]);
+        });
+      });
+     }
+
+}]);
 
 // authorControllers.controller('detailController', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
 //   $http.get('js/data.json').success(function(data) {
