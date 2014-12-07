@@ -279,10 +279,6 @@ var get_area_courses = function (program, area_name){
 	});
 
 	
-
-
-	
-
 }
 
 

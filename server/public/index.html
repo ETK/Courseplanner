@@ -97,83 +97,21 @@
 	  <div class="panel-body"  style="font-size: 12px; padding: 4px;">
 	  	<div class="col-xs-2 rows-striped_1 fundamental_courses" style="border-right: 1px solid #e1e4e9;">
 	  		<div class="row area_code" ng-repeat="area in areas track by $index">
-				<div ng-click="getLevels(area)">{{area}}</div>
+				<div ng-click="getCourses(area)">{{area}}</div>
 			</div>
 	  	</div>
 	  	<div class="col-xs-10 rows-striped fundamental_courses">
-		<div class="row course_margin">
-			<div class="thumbnail-group flex-left">
-				<div class="thumbnail course-block block-success">
+		<div class="row course_margin" ng-repeat="course in course_set">
+			<div class="thumbnail-group flex-left" >
+				<div class="thumbnail course-block block-success" ng-repeat="element in course">
 					<div class="course">
 						<span class="glyphicon glyphicon-remove-circle"></span>
-						<label class="courseCode">CSC 343</label>
+						<label class="courseCode">{{element}}</label>
 						<label class="courseDesc"><small>C Programming</small></label>
 					</div>
-				</div>
-				<div class="thumbnail course-block block-success">
-					<div class="course">
-						<span class="glyphicon glyphicon-remove-circle"></span>
-						<label class="courseCode">CSC 343</label>
-						<label class="courseDesc"><small>C Programming</small></label>
-					</div>
-				</div>
-				<div class="thumbnail course-block block-success">
-				</div>
-				<div class="thumbnail course-block block-success">
 				</div>
 			</div>
 		</div>
-		
-		<div class="row course_margin">
-				<div class="thumbnail-group flex-left">
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-				</div>
-		</div>
-		
-		<div class="row course_margin">
-				<div class="thumbnail-group flex-left">
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-				</div>
-		</div>
-		
-		<div class="row course_margin">
-				<div class="thumbnail-group flex-left">
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-				</div>
-		</div>
-		<div class="row course_margin">
-				<div class="thumbnail-group flex-left">
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-					<div class="thumbnail course-block block-success">
-					</div>
-				</div>
-		</div>	
 	 </div>
 	</div>
     </div> <!-- end of the row -->
