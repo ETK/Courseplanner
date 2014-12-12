@@ -60,10 +60,10 @@
 			<div class="row course_margin" ng-repeat="course_row in course_set">
 				<!---put this style in style sheet!-->
 				<div class="thumbnail-group flex-left"  ng-repeat="course in course_row" style="float:left;display:inline-block">
-					<div class="thumbnail course-block block-success">
+					<div class="thumbnail course-block block-success" ng-class="{selected:isSelected(course)}" >
 						<div class="course">
-							<span class="glyphicon glyphicon-remove-circle"></span>
-							<label class="courseCode">{{course.course_code}}</label>
+							<span class="glyphicon glyphicon-remove-circle" ng-click="removeCourse(course)"></span>
+							<label class="courseCode" ng-click="clickedCourse(course)">{{course.course_code}}</label>
 							<label class="courseDesc"><small>{{course.Title}}</small></label>
 						</div>
 					</div>

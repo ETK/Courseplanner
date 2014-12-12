@@ -17,19 +17,18 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
           $scope.areas = areanames;
 
      })
-     
+  
      $scope.levels = [];
      $scope.courses =[];
      $scope.selectedLevel ="";
      $scope.selectedArea ="";
-    
-  
 
      $scope.getLevels = function(area){
      
        
         $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels").success(function(levels) {
-          $scope.levels = levels
+          
+          $scope.levels = _.map(levels, function(level){return toLevelKey[level]})
         });
         $scope.selectedArea = area;
      }
@@ -40,8 +39,17 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
     
 
       $scope.course_set= [];
-       
-      $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+$scope.selectedArea+"/levels/"+toLevelKey[level]+"/courses").success(function(courses) {
+      $scope.courses =[];
+      $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+$scope.selectedArea+"/levels/"+level+"/courses").success(function(courses) {
+        
+        $scope.courses = courses;
+
+        //normalize level string to standard level numbers
+        for (var i=0;i<courses.length;i++){
+          courses[i].Level = toLevelKey[courses[i].Level];
+
+        }
+
         _.each(_.range(courses.length),function(i){
             if ($scope.course_set[(i/4)|0] ==null){
               $scope.course_set[(i/4)|0]  = [];
@@ -49,8 +57,24 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
             $scope.course_set[(i/4)|0].push(courses[i]);
         });
       });
-          
-     
+     }
+    $scope.selected = Array()
+     $scope.clickedCourse = function(course){
+        course.selected =true;
+
+     }
+     $scope.isSelected = function(course){
+        console.log((course.selected==undefined)?false : course.selected);
+        return (course.selected==undefined)?false : course.selected;
+
+     }
+     $scope.removeCourse= function(course){
+       /* for(var i =0;i<$scope.selected.length;i++){
+              if (course== $scope.selected[i])
+                $scope.selected.splice(i,1);
+        }
+        console.log($scope.selected)*/
+        course.selected =false;
      }
 
 }]);

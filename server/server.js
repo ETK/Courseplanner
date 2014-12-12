@@ -95,8 +95,6 @@ var getLevelKey = function (levels){
 		200 :["200","200/B"],
 		300 :["300","300/C"],
 		400 :["400","400/D"]
-
-
 	}
 
 	var results = new Array();
@@ -118,10 +116,7 @@ var getLevelKey = function (levels){
 
 
 var getFundCoursesForProgram = function(program){
-
-
 	dep_codes = new Array();
-	
 	//create a regex selector for each department code.
 	//CSC is department code, ^CSC is the regex
 	if(program.department){
@@ -248,9 +243,6 @@ var get_area_courses = function (program, area_name){
 			reject(new Error(error));
 		});
 
-
-		
-
 		dep_areas = new Array();
 		//search for the all departments of certain program
 		if(program.department){
@@ -258,8 +250,6 @@ var get_area_courses = function (program, area_name){
 				dep_areas.push(dep);
 			});
 		};
-
-
 		Areas.find( { area: {'$in' : dep_areas}},
                  { areas: { $elemMatch: { name: area_name } } } ).exec(function(err,results){
 				if(err){
