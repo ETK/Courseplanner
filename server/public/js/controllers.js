@@ -15,7 +15,6 @@ var toLevelKey ={
 appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
   	 $http.get("/api/program/ASSPE1689/fundcourses/areanames").success(function(areanames){
           $scope.areas = areanames;
-
      })
   
      $scope.levels = [];
@@ -23,9 +22,7 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
      $scope.selectedLevel ="";
      $scope.selectedArea ="";
 
-     $scope.getLevels = function(area){
-     
-       
+     $scope.getLevels = function(area){   
         $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels").success(function(levels) {
           
           $scope.levels = _.map(levels, function(level){return toLevelKey[level]})
@@ -57,6 +54,7 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
             $scope.course_set[(i/4)|0].push(courses[i]);
         });
       });
+
      }
     $scope.selected = Array()
      $scope.clickedCourse = function(course){
@@ -80,6 +78,42 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
 }]);
 
 
+appControllers.controller('AdvancedCourses', ['$scope', '$http', function($scope, $http) {
+     
+
+   $http.get("/api/program/ASSPE1689/areacourses/areanames").success(function(data){
+        $scope.areas = data;
+    }).error(function() {
+       alert("error text message (http get area courses)");
+    });
+     
+     $scope.levels = [];
+     $scope.courses =[];
+     $scope.selectedLevel ="";
+     $scope.selectedArea ="";
+     
+     $scope.getCourses = function(area){  
+        $scope.course_set= []; 
+
+        $http.get("/api/program/ASSPE1689/areacourses/areanames/"+area+"/courses").success(function(courses) {
+          //console.log("courses length: " + courses.length) 
+          _.each(_.range(courses.length),function(i){
+          if ($scope.course_set[(i/4)|0] ==null){
+            //console.log("courses number: " + i + "courses name " + courses[i]) 
+            $scope.course_set[(i/4)|0]  = [];
+          }
+          //console.log("COURSE OUTSIDE THE LOOP courses number: " + i + "courses name " + courses[i])
+          $scope.course_set[(i/4)|0].push(courses[i]); 
+        
+        });
+
+        }).error(function() {
+          alert("error text message (http get area courses)");
+        });
+        console.log("end result " + $scope.course_set)
+     }
+}]);
+
 // authorControllers.controller('detailController', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
 //   $http.get('js/data.json').success(function(data) {
 //     $scope.author = data;
@@ -91,7 +125,6 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
 //     }else{
 //     	$scope.prevItem = $scope.author.length - 1;
 //     }
-
 //     if($routeParams.itemId < $scope.author.length - 1)
 //     {
 //     	$scope.nextItem = Number($routeParams.itemId) + 1;
