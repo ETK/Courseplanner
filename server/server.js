@@ -308,7 +308,9 @@ var get_area_courses = function (program, area_name){
 									//console.log("The levels are " + results[0].areas[0].include_level + " The program are " + results[0].areas[0].name.substr(0, results[0].areas[0].name.indexOf(' ')));
 									get_level_course(results[0].areas[0].include_level, results[0].areas[0].name.substr(0, results[0].areas[0].name.indexOf(' ')))
 									.then(function(courses){
-										resolve(courses.concat(area_courses)); 
+										resolve(courses.concat(area_courses));
+										//if delete coures is empty -> return
+										//if not, delete the value and then return -> write one more delete function 
 									},function (error) {
 										console.log("I am in the second place");
 										// We only get here if "foo" fails
