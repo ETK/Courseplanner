@@ -12,15 +12,46 @@ var toLevelKey ={
   }
 
 
-appControllers.controller('fundmentalCourses', ['$scope', '$http', function($scope, $http) {
-  	 $http.get("/api/program/ASSPE1689/fundcourses/areanames").success(function(areanames){
-          $scope.areas = areanames;
-     })
-  
+//Creates Courses Collection and associated methods
+//all courses data uses this sington to perform data access and binding
+appControllers.factory('Courses',function($http){
+    return {
+      //singleton courses collection
+      data : [],
+      //method to query the courses collection by area and level
+      queryCourses: function(area, level,success){
+        $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels/"+level+"/courses").success(function(courses) {
+            //assign recieved courses to singleton courses collection
+            //this will cause anything that binds to reference to update
+            data = courses;
+            if (success!=null)
+              success(courses);
+        });
+
+      },
+    }
+
+
+});
+
+
+appControllers.controller('fundmentalCourses', ['$scope', '$http', 'Courses', function($scope, $http,Courses) {
+  	 
+    
      $scope.levels = [];
      $scope.courses =[];
      $scope.selectedLevel ="";
      $scope.selectedArea ="";
+  
+
+      $scope.course_set= [];
+
+      //bind Courses.data collection to UI variable
+      $scope.courses = Courses.data;
+
+      $http.get("/api/program/ASSPE1689/fundcourses/areanames").success(function(areanames){
+          $scope.areas = areanames;
+     });
 
      $scope.getLevels = function(area){   
         $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+area+"/levels").success(function(levels) {
@@ -31,32 +62,28 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
      }
 
      $scope.getCourses = function(level){
-      if ($scope.selectedArea=="") return;
-      if (toLevelKey[level]==undefined )return;
-    
+        if ($scope.selectedArea=="") return;
+        if (toLevelKey[level]==undefined )return;
+      
+        //perform course query, and on success, parse each course object and divide courses into rows
+        Courses.queryCourses($scope.selectedArea,level, function(courses){
+          $scope.course_set= [];
+          //normalize level string to standard level numbers
+          for (var i=0;i<courses.length;i++){
+            courses[i].Level = toLevelKey[courses[i].Level];
 
-      $scope.course_set= [];
-      $scope.courses =[];
-      $http.get("/api/program/ASSPE1689/fundcourses/areanames/"+$scope.selectedArea+"/levels/"+level+"/courses").success(function(courses) {
-        
-        $scope.courses = courses;
+          }
 
-        //normalize level string to standard level numbers
-        for (var i=0;i<courses.length;i++){
-          courses[i].Level = toLevelKey[courses[i].Level];
+          _.each(_.range(courses.length),function(i){
+              if ($scope.course_set[(i/4)|0] ==null){
+                $scope.course_set[(i/4)|0]  = [];
+              }
+              $scope.course_set[(i/4)|0].push(courses[i]);
+          });
 
-        }
-
-        _.each(_.range(courses.length),function(i){
-            if ($scope.course_set[(i/4)|0] ==null){
-              $scope.course_set[(i/4)|0]  = [];
-            }
-            $scope.course_set[(i/4)|0].push(courses[i]);
         });
-      });
-
-     }
-    $scope.selected = Array()
+      }
+   
      $scope.clickedCourse = function(course){
         course.selected =true;
 
@@ -67,11 +94,6 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', function($sco
 
      }
      $scope.removeCourse= function(course){
-       /* for(var i =0;i<$scope.selected.length;i++){
-              if (course== $scope.selected[i])
-                $scope.selected.splice(i,1);
-        }
-        console.log($scope.selected)*/
         course.selected =false;
      }
 
