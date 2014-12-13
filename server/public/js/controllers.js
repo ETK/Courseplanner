@@ -84,15 +84,29 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', 'Courses', fu
         });
       }
    
+
+      //when selected, the course.selected property is set to true
+      //in the view, ng-class="{selected:isSelected(course)}" is added to the course block
+      //dom element
+      //this binds the existence of "selected" class to the whether isSelected(course) evaluates
+      //true or false. 
      $scope.clickedCourse = function(course){
         course.selected =true;
 
      }
+
+      //this evaluates whether a course is being selected and returns true if so.
+      //when this returns true, "selected" class is added to course block dom,
+      //when this returns false, "selected" class is removed.
+      //this is listening to course.selected, i.e. if course.selected is changed, 
+      //the function is re-evaluated to reflect the change
      $scope.isSelected = function(course){
-        console.log((course.selected==undefined)?false : course.selected);
+     
         return (course.selected==undefined)?false : course.selected;
 
      }
+
+     //set the course to not being selected
      $scope.removeCourse= function(course){
         course.selected =false;
      }
