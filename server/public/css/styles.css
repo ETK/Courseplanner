@@ -179,6 +179,10 @@ padding: 1.5px 0px;*/
 	.course-block:hover {
 		border-color: #555;
 	}
+	.course-block.selected{
+		border-color:#555;
+		border-width: 3px;
+	}
 	
 	
 
