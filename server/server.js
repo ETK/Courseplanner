@@ -54,7 +54,7 @@ router.param('programid',function(req,res,next,programid){
 			
 			next(new Error("no program found"));
 		}
-		console.log(program)
+		//console.log(program)
 		req.program = program[0];
 		next();
 	});
@@ -105,7 +105,7 @@ var getLevelKey = function (levels){
 			if (leveldb[level])
 				results = results.concat(leveldb[level]);
 		});
-		console.log(results);
+		//console.log(results);
 		return results;
 	}else{
 		if (leveldb[levels])
@@ -118,8 +118,6 @@ var getLevelKey = function (levels){
 
 
 var getFundCoursesForProgram = function(program){
-
-
 	dep_codes = new Array();
 	
 	//create a regex selector for each department code.
@@ -137,7 +135,8 @@ var getFundCoursesForProgram = function(program){
 			'course_code': {'$in' : dep_codes},
 			'Level':{'$in':getLevelKey([100,200])},
 		},Course.Project.Summary,function(err,courses){
-			console.log("got course by department: "+courses.length+ " found");
+			console.log("got course by department: "+courses+ " found");
+			//console.log("got course by department: "+courses.length+ " found");
 			resolve(courses);
 		});
 	}),
@@ -172,7 +171,7 @@ var getFundCoursesForProgram = function(program){
 
 			});
 			
-			console.log("got coursename from this program requirement: "+coursenames.length+" found");
+			//console.log("got coursename from this program requirement: "+coursenames.length+" found");
 			return coursenames;
 		}).then(function(coursenames){
 			return Promise(function(resolve,reject){
@@ -185,7 +184,7 @@ var getFundCoursesForProgram = function(program){
 				Course.find({
 					'course_code':{"$in":coursenameRegex},
 				},Course.Project.Summary,function(err,courses){
-					console.log("got courses for these coursenames: "+courses.length+" found");
+					//console.log("got courses for these coursenames: "+courses.length+" found");
 					resolve(courses);
 
 				});
@@ -194,7 +193,6 @@ var getFundCoursesForProgram = function(program){
 		function(courseFromDepartment,courseFromRequirement){
 			return courseFromRequirement.concat(courseFromDepartment);
 	});
-	
 }
 
 
@@ -216,7 +214,7 @@ var get_area = function (program){
 				else{
 					//find the specific areas and returing back
 					specific_areas = new Array();
-					console.log(results[0].areas.name);
+					//console.log(results[0].areas.name);
 					results[0].areas.forEach(function(areas){
 						specific_areas.push(areas.name)
 					});
@@ -226,12 +224,48 @@ var get_area = function (program){
 	});
 }
 
+//for advanced table
+var get_individual_course = function(course_code){
+	course_code = new RegExp("^"+course_code);
+
+	return Promise(function(resolve,reject){
+		Course.find({
+			'course_code':  course_code
+		},Course.Project.Summary,function(err,courses){
+			//console.log("got course by department: " + courses);
+			//console.log("got course by department: "+courses.length+ " found");
+			resolve(courses);
+		});
+	});
+}
+
+//for advanced table
+var get_level_course = function(level, dep_area){
+	dep_area = new RegExp("^"+dep_area);
+
+	console.log(level + " " + dep_area);
+	return Promise(function(resolve,reject){
+		Course.find({
+			//'course_code': {'$in': dep_area},
+			'course_code':  dep_area,
+			//make sure you are passing an array of string 
+			'Level':{'$in': getLevelKey(level)},
+		},Course.Project.Summary,function(err,courses){
+			console.log("got course by department: " + courses);
+			//console.log("got course by department: "+courses.length+ " found");
+			resolve(courses);
+		});
+	});
+}
+
 
 var get_area_courses = function (program, area_name){
 	//find the program -> area_name (calling the get_area funtion)
 	//if area inside array, 
 		//then print the courses, 
-			//check include courses and level
+			//check include courses
+			//call get level courses function, input level and course code
+				//-> output the projection
 			//delete the exclude courses
 	//or give the errors
 
@@ -260,6 +294,7 @@ var get_area_courses = function (program, area_name){
 		};
 
 
+
 		Areas.find( { area: {'$in' : dep_areas}},
                  { areas: { $elemMatch: { name: area_name } } } ).exec(function(err,results){
 				if(err){
@@ -267,11 +302,35 @@ var get_area_courses = function (program, area_name){
 				}
 				else{
 					//find the specific areas and returing back
-					area_courses = new Array();
+					var area_courses = new Array();
+					var index = 0
 					results[0].areas[0].courses.forEach(function(course_code){
-					area_courses.push(course_code)
+						get_individual_course(course_code)
+						.then(function(course_info){
+
+							area_courses.push(course_info[0]);
+							index++;
+							if(results[0].areas[0].courses.length  == index){
+								//resolve(area_courses); 
+								if(typeof results[0].areas[0].include_level !== 'undefined' && results[0].areas[0].include_level.length > 0){
+									//console.log("The levels are " + results[0].areas[0].include_level + " The program are " + results[0].areas[0].name.substr(0, results[0].areas[0].name.indexOf(' ')));
+									get_level_course(results[0].areas[0].include_level, results[0].areas[0].name.substr(0, results[0].areas[0].name.indexOf(' ')))
+									.then(function(courses){
+										resolve(courses.concat(area_courses)); 
+									},function (error) {
+										console.log("I am in the second place");
+										// We only get here if "foo" fails
+										res.json(error);
+									}).done();
+									//call get all the level courses
+									//and then delete exclude courses
+								}
+							}
+						},function (error) {
+							// We only get here if "foo" fails
+							reject(new Error(error));
+						});	
 					});
-					resolve(area_courses);
 					
 				}
 		});
@@ -353,8 +412,7 @@ router.route("/course")
 		res.json(data);
 	});
 
-}).post(function(req, res) {
-		
+}).post(function(req, res) {	
 	var course = new Course(); 		// create a new instance of the Bear model
 	course.course_code = req.body.code;  // set the bears name (comes from the request)
 
@@ -396,7 +454,63 @@ router.route('/program/:programid/areacourses/areanames/:area_name/courses')
 	}).done();
 });
 
+//var get_level_course = function(level, dep_area){
+router.route('/program/1')
+.get(function(req,res){	
+	//get all areas courses from department
+	get_level_course(100, 'CSC')
+	.then(function(courses){
+		res.json(courses);
+	},function (error) {
+		// We only get here if "foo" fails
+		res.json(error);
+	}).done();
+});
 
+
+//get_individual_course
+router.route('/program/2')
+.get(function(req,res){	
+	var list = new Array();
+	var index = 0;
+	var courses = ["CSC310",
+                "CSC320",
+                "CSC321",
+                "CSC384",
+                "CSC401",
+                "CSC411",
+                "CSC412",
+                "CSC420",
+                "CSC438",
+                "CSC448",
+                "CSC463",
+                "CSC485",
+                "CSC486"];
+    courses.forEach(function(result){
+    console.log("Outer" + index);
+    	//get all areas courses from department
+		get_individual_course(result)
+		.then(function(info){
+			//console.log( courses.length + " inner " + index);
+			list.push(info);
+			index++;
+			if(courses.length  == index){
+				res.json(list);
+			}	
+		},function (error) {
+			// We only get here if "foo" fails
+			res.json(error);
+		});
+		
+    });
+ 	// Q.allSettled(list)
+ 	//  .then(function(courses){
+	// 	console.log(courses);
+	// 	res.json(error);
+	// });
+    
+
+});
 
 
 
