@@ -181,6 +181,7 @@ padding: 1.5px 0px;*/
 	}
 	.course-block.selected{
 		border-color:#555;
+		border-width: 3px;
 	}
 	
 	
