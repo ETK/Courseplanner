@@ -222,17 +222,17 @@ var get_area = function (program){
 }
 
 //for advanced table
-var get_individual_course = function(course_code){
-	course_code = new RegExp("^"+course_code);
-
+var excluded_courses = function(final_courses, ex_courses){
 	return Promise(function(resolve,reject){
-		Course.find({
-			'course_code':  course_code
-		},Course.Project.Summary,function(err,courses){
-			//console.log("got course by department: " + courses);
-			//console.log("got course by department: "+courses.length+ " found");
-			resolve(courses);
+		var selected = _.filter(final_courses, function(a){
+				//console.log(" a.course_code" + a.course_code);
+			    return _.find(ex_courses, function(b){
+			    	//console.log("b is " + b + " a.course_code" + a.course_code.substring(0, 6));
+			        return b == a.course_code.substring(0, 6);
+			    })==undefined;
 		});
+		//console.log(final_courses);
+		resolve(selected);
 	});
 }
 
@@ -249,6 +249,22 @@ var get_level_course = function(level, dep_area){
 			'Level':{'$in': getLevelKey(level)},
 		},Course.Project.Summary,function(err,courses){
 			console.log("got course by department: " + courses);
+			//console.log("got course by department: "+courses.length+ " found");
+			resolve(courses);
+		});
+	});
+}
+
+
+//for advanced table
+var get_individual_course = function(course_code){
+	course_code = new RegExp("^"+course_code);
+
+	return Promise(function(resolve,reject){
+		Course.find({
+			'course_code':  course_code
+		},Course.Project.Summary,function(err,courses){
+			//console.log("got course by department: " + courses);
 			//console.log("got course by department: "+courses.length+ " found");
 			resolve(courses);
 		});
@@ -308,13 +324,23 @@ var get_area_courses = function (program, area_name){
 									//console.log("The levels are " + results[0].areas[0].include_level + " The program are " + results[0].areas[0].name.substr(0, results[0].areas[0].name.indexOf(' ')));
 									get_level_course(results[0].areas[0].include_level, results[0].areas[0].name.substr(0, results[0].areas[0].name.indexOf(' ')))
 									.then(function(courses){
-										resolve(courses.concat(area_courses));
+										var final_courses = courses.concat(area_courses);
+										if(typeof results[0].areas[0].excludes !== 'undefined' && results[0].areas[0].excludes.length > 0){
+											excluded_courses(final_courses, results[0].areas[0].excludes)
+											.then(function(courses){
+												resolve(courses);
+											},function (error) {
+												// We only get here if "foo" fails
+												reject(new Error(error));
+											}).done();
+										}
+										else{
+											resolve(final_courses);
+										}
 										//if delete coures is empty -> return
 										//if not, delete the value and then return -> write one more delete function 
 									},function (error) {
-										console.log("I am in the second place");
-										// We only get here if "foo" fails
-										res.json(error);
+										reject(new Error(error));
 									}).done();
 									//call get all the level courses
 									//and then delete exclude courses
@@ -448,7 +474,7 @@ router.route('/program/:programid/areacourses/areanames/:area_name/courses')
 	}).done();
 });
 
-//var get_level_course = function(level, dep_area){
+//==================================================================== testing area
 router.route('/program/1')
 .get(function(req,res){	
 	//get all areas courses from department
@@ -480,6 +506,8 @@ router.route('/program/2')
                 "CSC463",
                 "CSC485",
                 "CSC486"];
+
+     var promises = Array();
     courses.forEach(function(result){
     console.log("Outer" + index);
     	//get all areas courses from department
@@ -497,18 +525,98 @@ router.route('/program/2')
 		});
 		
     });
- 	// Q.allSettled(list)
- 	//  .then(function(courses){
-	// 	console.log(courses);
-	// 	res.json(error);
-	// });
-    
-
 });
 
 
+router.route('/program/3')
+.get(function(req,res){	
 
 
+var final_courses = [
+    {
+        "_id": "53c5b145bf1ee3a1f232f340",
+        "Level": "300/C",
+        "Title": "STA302H1: Methods of Data Analysis I",
+        "course_code": "STA302H1",
+        "prerequisite": "STA248H1/STA255H1/STA261H1/ECO220Y1(70%)/ECO227Y1"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f342",
+        "Level": "300/C",
+        "Title": "STA304H1: Surveys, Sampling and Observational Data (formerly STA322H1)",
+        "course_code": "STA304H1",
+        "prerequisite": "ECO220Y1/ECO227Y1/GGR270H1/PSY201H1/SOC300Y1/STA220H1/STA255H1/STA261H1(cr s_sta.htm#STA261H1)/STA248H1/EEB225H1"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f344",
+        "Level": "300/C",
+        "Title": "STA347H1: Probability",
+        "course_code": "STA347H1",
+        "prerequisite": "STA247H1/STA255H1/STA257H1/ECO227;MAT223H1/MAT240H1; MAT235Y1/MAT237Y1/MAT257Y1 (Note: STA257H1 and MAT237Y1/MAT257Y1;(MAT223H1,MAT224H1)/MAT240H1 are very strongly recommended)"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f350",
+        "Level": "400/D",
+        "Title": "STA457H1: Time Series Analysis",
+        "course_code": "STA457H1",
+        "prerequisite": "CO375H1/STA302H1; MAT235Y1/MAT237Y1/MAT257Y1"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f351",
+        "Level": "400/D",
+        "Title": "STA490Y1: Statistical Consultation, Communication, and Collaboration (formerlySTA490H1)",
+        "course_code": "STA490Y1",
+        "prerequisite": "STA303H1"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f353",
+        "course_code": "STA497H1",
+        "Level": "400/D",
+        "Title": "STA497H1: Readings in Statistics"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f354",
+        "course_code": "STA498Y1",
+        "Level": "400/D",
+        "Title": "STA498Y1: Readings in Statistics"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f355",
+        "course_code": "STA499Y1",
+        "Level": "400/D",
+        "Title": "STA499Y1: Readings in Statistics"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f0fe",
+        "Level": "400/D",
+        "course_code": "STA465H1",
+        "prerequisite": "STA302H1"
+    },
+    {
+        "_id": "53c5b145bf1ee3a1f232f33f",
+        "Level": "200/B",
+        "Title": "STA261H1: Probability and Statistics II",
+        "course_code": "STA261H1",
+        "prerequisite": "STA257H1"
+    }
+];
+
+var ex_courses = [
+                "STA261", 
+                "STA465", 
+            ];
+
+	//get all areas courses from department
+	excluded_courses(final_courses, ex_courses)
+	.then(function(courses){
+		res.json(courses);
+	},function (error) {
+		// We only get here if "foo" fails
+		res.json(error);
+	}).done();
+});
+
+//==================================================================== testing area
 
 
 // REGISTER OUR ROUTES -------------------------------
