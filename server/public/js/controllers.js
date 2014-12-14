@@ -92,7 +92,6 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', 'Courses', fu
       //true or false. 
      $scope.clickedCourse = function(course){
         course.selected =true;
-
      }
 
       //this evaluates whether a course is being selected and returns true if so.
@@ -101,9 +100,7 @@ appControllers.controller('fundmentalCourses', ['$scope', '$http', 'Courses', fu
       //this is listening to course.selected, i.e. if course.selected is changed, 
       //the function is re-evaluated to reflect the change
      $scope.isSelected = function(course){
-     
         return (course.selected==undefined)?false : course.selected;
-
      }
 
      //set the course to not being selected
@@ -140,13 +137,14 @@ appControllers.controller('AdvancedCourses', ['$scope', '$http', function($scope
           }
           //console.log("COURSE OUTSIDE THE LOOP courses number: " + i + "courses name " + courses[i])
           $scope.course_set[(i/4)|0].push(courses[i]); 
+
         
         });
 
         }).error(function() {
           alert("error text message (http get area courses)");
         });
-        console.log("end result " + $scope.course_set)
+        //console.log("end result " + $scope.course_set)
      }
 }]);
 

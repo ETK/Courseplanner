@@ -345,6 +345,9 @@ var get_area_courses = function (program, area_name){
 									//call get all the level courses
 									//and then delete exclude courses
 								}
+								else{
+									resolve(area_courses);
+								}
 							}
 						},function (error) {
 							// We only get here if "foo" fails
